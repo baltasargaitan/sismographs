@@ -477,17 +477,11 @@ Fast development server, modern tooling, instant hot module reloading for respon
 
 ---
 
-## Academic Context
 
-This project was originally developed as a case study for **Information Systems Design**, a university course at **Universidad Tecnológica Nacional, Facultad Regional Córdoba (UTN FRC)**.
-
-The academic assignment required implementing the Observer design pattern for real-time monitoring of a seismic inspection system. Over time, it evolved into a reference implementation demonstrating professional software engineering practices.
-
----
 
 ## Author
 
-**Baltasar Gaitán** — Full-stack engineer specializing in .NET and cloud architecture
+**Baltasar Gaitan Acevedo** —  Software Engineer · Backend · Data · Integrations 
 
 ---
 
