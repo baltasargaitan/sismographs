@@ -15,10 +15,6 @@ var builder = WebApplication.CreateBuilder(args);
 //  CARGA DE VARIABLES DE ENTORNO
 // ----------------------------------------------------------
 DotNetEnv.Env.Load();
-Console.WriteLine("MAIL_USER=" + Environment.GetEnvironmentVariable("MAIL_USER"));
-Console.WriteLine("MAIL_KEY=" + Environment.GetEnvironmentVariable("MAIL_KEY"));
-Console.WriteLine("SMTP_FROM=" + Environment.GetEnvironmentVariable("SMTP_FROM"));
-Console.WriteLine("SMTP_NAME=" + Environment.GetEnvironmentVariable("SMTP_NAME"));
 
 // ----------------------------------------------------------
 //  CONFIGURACIÓN SMTP (inyecta variables de entorno reales)
@@ -79,11 +75,14 @@ builder.Services.AddSingleton<IObservadorCierreOrden, ObservadorWebMonitor>();
 // ----------------------------------------------------------
 //  CORS: Permitir acceso desde el frontend (Vite localhost)
 // ----------------------------------------------------------
+var frontendOrigin = Environment.GetEnvironmentVariable("FRONTEND_ORIGIN") 
+    ?? "http://localhost:5173";
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", policy =>
+    options.AddPolicy("AllowFrontend", policy =>
         policy
-            .AllowAnyOrigin()
+            .WithOrigins(frontendOrigin)
             .AllowAnyHeader()
             .AllowAnyMethod()
     );
@@ -97,7 +96,7 @@ var app = builder.Build();
 // ----------------------------------------------------------
 //  HABILITAR CORS ANTES DE TODO
 // ----------------------------------------------------------
-app.UseCors("AllowAll");
+app.UseCors("AllowFrontend");
 
 // ----------------------------------------------------------
 //  SUSCRIPCIÓN DE OBSERVADORES AL SUJETO (al iniciar app)

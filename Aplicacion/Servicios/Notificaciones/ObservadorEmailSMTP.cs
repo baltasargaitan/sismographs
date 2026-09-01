@@ -35,9 +35,6 @@ namespace Aplicacion.Servicios.Notificaciones
                 {
                     intentos++;
                     using var smtp = new SmtpClient();
-                    Console.WriteLine($"[DEBUG] HOST={_config.Host}");
-                    Console.WriteLine($"[DEBUG] USER={_config.User}");
-                    Console.WriteLine($"[DEBUG] PASS={_config.Password}");
 
 
                     // ✅ usar StartTLS explícito, no Auto ni SslOnConnect

@@ -10,10 +10,10 @@ namespace Infraestructura.Persistencia
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
 
-            //  Cadena de conexión directa — 
-            optionsBuilder.UseSqlServer(
-                "Server=NTBK-GAITAN\\SQLEXPRESS;Database=SistemaSismografosDB;Trusted_Connection=True;TrustServerCertificate=True;"
-            );
+            var connectionString = Environment.GetEnvironmentVariable("CONNECTIONSTRING_DEFAULTCONNECTION")
+                ?? "Server=localhost\\SQLEXPRESS;Database=SistemaSismografosDB;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True;";
+
+            optionsBuilder.UseSqlServer(connectionString);
 
             return new AppDbContext(optionsBuilder.Options);
         }

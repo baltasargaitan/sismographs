@@ -11,8 +11,11 @@ namespace Infraestructura
     {
         public static IServiceCollection AddInfraestructura(this IServiceCollection services, IConfiguration configuration)
         {
+            var connectionString = Environment.GetEnvironmentVariable("CONNECTIONSTRING_DEFAULTCONNECTION")
+                ?? configuration.GetConnectionString("DefaultConnection");
+
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
+                options.UseSqlServer(connectionString)
             );
 
             services.AddScoped<IRepositorioOrdenDeInspeccion, OrdenRepositorio>();
